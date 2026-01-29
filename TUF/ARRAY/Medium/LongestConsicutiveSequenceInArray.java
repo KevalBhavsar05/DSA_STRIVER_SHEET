@@ -1,14 +1,10 @@
-
-
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
-import java.util.TreeMap;
 
 public class LongestConsicutiveSequenceInArray {
     // 1st approach is to sort array and find max length of sequence -> O(nlogn + n)
     // 2nd is to use Set -> O(n)
-    
+
     // My 1st solution
     // public static int longestConsecutive(int[] nums) {
     // if (nums.length == 0)
@@ -35,26 +31,49 @@ public class LongestConsicutiveSequenceInArray {
     // return maxCount;
     // }
 
-    // 2nd approach
+    // public static int longestConsecutive(int[] nums) {
+    // if (nums.length == 0)
+    // return 0;
+
+    // int maxLength = 1;
+    // int lastSmall = Integer.MIN_VALUE;
+    // int count = 0;
+    // Arrays.sort(nums);
+    // for (int i = 0; i < nums.length; i++) {
+    // if (nums[i] - 1 == lastSmall) {
+    // count++;
+    // lastSmall = nums[i];
+    // } else if (nums[i] != lastSmall) {
+    // count = 1;
+    // lastSmall = nums[i];
+    // }
+    // maxLength = Math.max(count, maxLength);
+    // }
+    // return maxLength;
+    // }
+
+    // Optimal approach
     public static int longestConsecutive(int[] nums) {
         if (nums.length == 0)
             return 0;
+        int maxLength = 1;
         Set<Integer> set = new HashSet<>();
-        for (int num : nums) {
-            set.add(num);
+        // add all elements into set(all unique elements)
+        for (int x : nums) {
+            set.add(x);
         }
-        int maxLength = 0;
-        for (int num : nums) {
-            if (!set.contains(num - 1)) {
-                int currentNum = num;
-                int currentLength = 1;
+        // iterate through set
 
-                while (set.contains(currentNum + 1)) {
-                    currentNum++;
-                    currentLength++;
-                    set.remove(currentNum);
+        for (int el : set) {
+            // if nums[i]-1 OR el-1 it is the starting point of sequence
+            if (!set.contains(el - 1)) {
+                int count = 1;
+                int x = el;
+                while (set.contains(x + 1)) {
+                    x++;
+                    count++;
                 }
-                maxLength = Math.max(maxLength, currentLength);
+                maxLength = Math.max(count, maxLength);
             }
         }
         return maxLength;

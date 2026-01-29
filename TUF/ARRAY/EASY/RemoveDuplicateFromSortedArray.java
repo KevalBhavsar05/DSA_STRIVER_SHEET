@@ -1,14 +1,13 @@
 
-
 public class RemoveDuplicateFromSortedArray {
     public int removeDuplicates(int[] nums) {
-        int j = 0;
-        for (int i = 1; i < nums.length; i++) {
+        int i = 0;
+        for (int j = 1; j < nums.length; j++) {
             if (nums[i] != nums[j]) {
-                nums[j + 1] = nums[i];
-                j++;
+                nums[i + 1] = nums[j];
+                i++;
             }
         }
-        return ++j;
+        return ++i;
     }
 }

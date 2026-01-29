@@ -1,20 +1,25 @@
-
-
+import java.util.ArrayList;
 import java.util.List;
 
 public class SpiralMatrix {
     public static List<Integer> printSpiral(int[][] matrix) {
-        List<Integer> result = new java.util.ArrayList<>();
+        List<Integer> result = new ArrayList<>();
         if (matrix == null || matrix.length == 0) {
             return result;
         }
 
-        int m = matrix.length;
-        int n = matrix[0].length;
+        int m = matrix.length; // number of rows
+        int n = matrix[0].length;// number of columns
         int top = 0;
         int right = n - 1;
         int bottom = m - 1;
         int left = 0;
+
+        // eg. matrix = [
+        // [1, 2, 3],
+        // [4, 5, 6],
+        // [7, 8, 9]
+        // ]
 
         while (top <= bottom && left <= right) {
             // left to right
@@ -56,6 +61,5 @@ public class SpiralMatrix {
                 { 7, 8, 9 }
         };
         printSpiral(matrix);
-
     }
 }
